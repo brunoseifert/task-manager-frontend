@@ -1,22 +1,20 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from "react";
+import TaskItem from "./components/TaskItem";
 
-function App() {
+const App = () => {
+    const [tasks, setTasks] = useState([
+        { id: 1, description: "Estudar programação", isCompleted: false },
+        { id: 2, description: "Ler livros", isCompleted: false },
+        { id: 3, description: "Fazer compras", isCompleted: true },
+    ]);
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <>
+            {tasks.map((task) => (
+                <TaskItem key={task.id} task={task} />
+            ))}
+        </>
     );
-}
+};
 
 export default App;
