@@ -1,10 +1,12 @@
-const CustomInput = ({ value, label }) => {
+import "./CustomInput.scss";
+
+const CustomInput = ({ value, label, onChange }) => {
     return (
         <div className="custom-input-container">
             <input
                 type="text"
-                placeholder="Adicionar Tarefa"
                 className="custom-input"
+                onChange={(e) => onChange(e)}
             />
 
             {label ? (
@@ -12,7 +14,9 @@ const CustomInput = ({ value, label }) => {
                     className={`${
                         value.length > 0 ? "shrink" : ""
                     } custom-input-label`}
-                ></label>
+                >
+                    {label}
+                </label>
             ) : null}
         </div>
     );
