@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 import "./Tasks.scss";
 
+import TaskItem from "./TaskItem";
+
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
 
@@ -12,9 +14,10 @@ const Tasks = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get(
-                "https://fsc-task-manager-backend.herokuapp.com/tasks"
-            );
+            const response = await axios.get("http://localhost:8000/tasks");
+
+            setTasks(response.data);
+            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -29,7 +32,7 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted === false)
                         .map((lastTask) => (
-                            <p>{lastTask.description}</p>
+                            <TaskItem task={lastTask} />
                         ))}
                 </div>
             </div>
@@ -40,7 +43,7 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted === true)
                         .map((completedTask) => (
-                            <p>{completedTask.description}</p>
+                            <TaskItem task={completedTask} />
                         ))}
                 </div>
             </div>
