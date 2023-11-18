@@ -30,6 +30,8 @@ const AddTask = ({ fetchTasks }) => {
                 }),
             });
 
+            alert.success("Tarefa adicionada com sucesso!");
+
             setTask("");
 
             await fetchTasks();
