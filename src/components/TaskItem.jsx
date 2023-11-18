@@ -19,6 +19,24 @@ const TaskItem = ({ task, fetchTasks }) => {
         }
     };
 
+    const handleCompleteTask = async () => {
+        try {
+            await axios.patch(`http://localhost:8000/tasks/${task._id}`, {
+                isCompleted: !task.isCompleted,
+            });
+
+            if (task.isCompleted) {
+                alert.success("Tarefa marcada como não concluída!");
+            } else {
+                alert.success("Tarefa marcada como concluída!");
+            }
+
+            await fetchTasks();
+        } catch (error) {
+            alert.show("Não foi possível atualizar a tarefa!");
+        }
+    };
+
     return (
         <div className="task-item-container">
             <div className="task-description">
@@ -30,7 +48,11 @@ const TaskItem = ({ task, fetchTasks }) => {
                     }
                 >
                     {task.description}
-                    <input type="checkbox" defaultChecked={task.isCompleted} />
+                    <input
+                        type="checkbox"
+                        defaultChecked={task.isCompleted}
+                        onChange={handleCompleteTask}
+                    />
                     <span
                         className={
                             task.isCompleted
