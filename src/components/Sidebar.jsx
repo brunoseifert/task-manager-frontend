@@ -4,12 +4,17 @@ import logo from "../assets/logo-1.png";
 
 const Sidebar = () => {
     return (
-        <div className="sidebar-container">
-            <div className="logo">
-                <img src={logo} alt="logo" />
-            </div>
+        <div>
+            <div className="sidebar-container">
+                <div className="logo">
+                    <img src={logo} alt="logo" />
+                </div>
 
-            <div className="sign-out">
+                <div className="sign-out">
+                    <CustomButton>Sair</CustomButton>
+                </div>
+            </div>
+            <div className="sign-out-mobile">
                 <CustomButton>Sair</CustomButton>
             </div>
         </div>
