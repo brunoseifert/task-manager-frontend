@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
 
 import "./Tasks.scss";
 
@@ -8,6 +9,8 @@ import AddTask from "./AddTask";
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
+
+    const alert = useAlert();
 
     useEffect(() => {
         fetchTasks();
@@ -19,8 +22,8 @@ const Tasks = () => {
 
             setTasks(response.data);
             console.log(response.data);
-        } catch (error) {
-            console.log(error);
+        } catch (_error) {
+            alert.show("Não foi possível carregar as tarefas!");
         }
     };
     return (

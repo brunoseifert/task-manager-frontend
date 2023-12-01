@@ -35,8 +35,8 @@ const AddTask = ({ fetchTasks }) => {
             setTask("");
 
             await fetchTasks();
-        } catch (error) {
-            console.log(error);
+        } catch (_error) {
+            console.log(_error);
         }
     };
 
