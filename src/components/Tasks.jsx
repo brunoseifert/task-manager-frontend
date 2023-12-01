@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAlert } from "react-alert";
 
 import "./Tasks.scss";
@@ -12,10 +12,6 @@ const Tasks = () => {
 
     const alert = useAlert();
 
-    useEffect(() => {
-        fetchTasks();
-    }, []);
-
     const fetchTasks = async () => {
         try {
             const response = await axios.get("http://localhost:8000/tasks");
@@ -26,6 +22,18 @@ const Tasks = () => {
             alert.show("Não foi possível carregar as tarefas!");
         }
     };
+
+    const lastTasks = useMemo(() => {
+        return tasks.filter((task) => task.isCompleted === false);
+    }, [tasks]);
+
+    const completedTasks = useMemo(() => {
+        return tasks.filter((task) => task.isCompleted);
+    }, [tasks]);
+
+    useEffect(() => {
+        fetchTasks();
+    }, []);
     return (
         <div className="tasks-container">
             <h2>Minhas tarefas</h2>
@@ -34,7 +42,7 @@ const Tasks = () => {
                 <h3>Ultimas tarefas</h3>
                 <AddTask fetchTasks={fetchTasks} />
                 <div className="tasks-list">
-                    {tasks
+                    {lastTasks
                         .filter((task) => task.isCompleted === false)
                         .map((lastTask) => (
                             <TaskItem
@@ -49,7 +57,7 @@ const Tasks = () => {
             <div className="completed-tasks">
                 <h3>Tarefas concluídas</h3>
                 <div className="tasks-list">
-                    {tasks
+                    {completedTasks
                         .filter((task) => task.isCompleted)
                         .map((completedTask) => (
                             <TaskItem
