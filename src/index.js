@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider as AlertProvider, positions, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { BrowserRouter } from "react-router-dom";
 
 const options = {
     position: positions.BOTTOM_CENTER,
@@ -15,9 +16,11 @@ const options = {
 
 ReactDOM.render(
     <React.StrictMode>
-        <AlertProvider template={AlertTemplate} {...options}>
-            <App />
-        </AlertProvider>
+        <BrowserRouter>
+            <AlertProvider template={AlertTemplate} {...options}>
+                <App />
+            </AlertProvider>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")
 );

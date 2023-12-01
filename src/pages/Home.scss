@@ -1,0 +1,13 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.tasks {
+    margin-left: 181px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+    }
+}
