@@ -6,13 +6,14 @@ import "./Tasks.scss";
 
 import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
+import { useCallback } from "react";
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
 
     const alert = useAlert();
 
-    const fetchTasks = async () => {
+    const fetchTasks = useCallback(async () => {
         try {
             const response = await axios.get("http://localhost:8000/tasks");
 
@@ -21,7 +22,7 @@ const Tasks = () => {
         } catch (_error) {
             alert.show("Não foi possível carregar as tarefas!");
         }
-    };
+    }, [alert]);
 
     const lastTasks = useMemo(() => {
         return tasks.filter((task) => task.isCompleted === false);
@@ -33,7 +34,7 @@ const Tasks = () => {
 
     useEffect(() => {
         fetchTasks();
-    }, []);
+    }, [fetchTasks]);
     return (
         <div className="tasks-container">
             <h2>Minhas tarefas</h2>
