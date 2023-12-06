@@ -19,7 +19,7 @@ const AddTask = ({ fetchTasks }) => {
                 return;
             }
 
-            await fetch("http://localhost:8000/tasks", {
+            await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

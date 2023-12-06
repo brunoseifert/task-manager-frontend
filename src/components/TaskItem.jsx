@@ -9,7 +9,9 @@ const TaskItem = ({ task, fetchTasks }) => {
 
     const handleDeleteTask = async () => {
         try {
-            await axios.delete(`http://localhost:8000/tasks/${task._id}`);
+            await axios.delete(
+                `${process.env.REACT_APP_API_URL}/tasks/${task._id}`
+            );
 
             await fetchTasks();
 
@@ -21,9 +23,12 @@ const TaskItem = ({ task, fetchTasks }) => {
 
     const handleCompleteTask = async () => {
         try {
-            await axios.patch(`http://localhost:8000/tasks/${task._id}`, {
-                isCompleted: !task.isCompleted,
-            });
+            await axios.patch(
+                `${process.env.REACT_APP_API_URL}/tasks/${task._id}`,
+                {
+                    isCompleted: !task.isCompleted,
+                }
+            );
 
             if (task.isCompleted) {
                 alert.success("Tarefa marcada como não concluída!");
